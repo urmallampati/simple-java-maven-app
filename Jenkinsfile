@@ -1,14 +1,12 @@
-@Library('my-shared-library') _
-import com.mycompany.app.App
 pipeline {
 parameters {
         choice(choices: "dev\nsit\nstaging\nprod\n", description: 'Environment to deploy', name: 'ENVIRONMENT')
-        booleanParam(defaultValue: false, description: 'Upload configuration files to S3', name: 'uploadConfig')
-        booleanParam(defaultValue: false, description: 'Upload scripts to S3', name: 'uploadStripts')
-        booleanParam(defaultValue: false, description: 'dummy param', name: 'dummyParam')
-                booleanParam(defaultValue: false, description: 'dummy param', name: 'dummyParam2')
-
+        choice(choices: "create\nupdate\ndelete", description: 'Environment to deploy', name: 'action')
 	}
+	environment{
+            envr="${params.ENVIRONMENT}"
+            action=env.getProperty('devint_aws_cred_id')
+        }
     agent {
         docker {
             image 'maven:3-alpine'
@@ -17,6 +15,7 @@ parameters {
     }
     stages {
         stage('Build') {
+            when { anyOf { action 'create'; action 'nupdate' } }
             steps {
                 sh 'mvn -B -DskipTests clean package'
             }
