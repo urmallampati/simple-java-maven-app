@@ -1,4 +1,7 @@
 pipeline {
+parameters {
+        choice(choices: "dev\nsit\nstaging\nprod\n", description: 'Environment to deploy', name: 'ENVIRONMENT')
+	}
     agent {
         docker {
             image 'maven:3-alpine'
