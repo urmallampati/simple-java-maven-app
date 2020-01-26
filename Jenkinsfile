@@ -1,4 +1,3 @@
-@Grab('com.amazonaws:aws-java-sdk:1.11.205')
 pipeline {
 parameters {
         choice(choices: "dev\nsit\nstaging\nprod\n", description: 'Environment to deploy', name: 'ENVIRONMENT')
@@ -12,6 +11,7 @@ parameters {
             args '-v /root/.m2:/root/.m2'
         }
     }
+    @Grab('com.amazonaws:aws-java-sdk:1.11.205')
     stages {
         stage('Build') {
             steps {
