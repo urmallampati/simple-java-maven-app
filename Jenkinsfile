@@ -15,7 +15,7 @@ parameters {
     }
     stages {
         stage('Build') {
-            when {  expression { action == 'create' }}
+            when {  expression { params.action == 'create' }}
             steps {
                 sh 'mvn -B -DskipTests clean package'
             }
