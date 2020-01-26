@@ -1,6 +1,7 @@
 pipeline {
 parameters {
         choice(choices: "dev\nsit\nstaging\nprod\n", description: 'Environment to deploy', name: 'ENVIRONMENT')
+        choice(choices: "YES\nNO", description: 'Upload configuration and installation files to S3', name: 'UPLOADTOS3')
 	}
     agent {
         docker {
