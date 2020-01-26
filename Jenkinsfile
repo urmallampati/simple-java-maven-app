@@ -1,8 +1,10 @@
+@Grab('com.amazonaws:aws-java-sdk:1.11.205')
 pipeline {
 parameters {
         choice(choices: "dev\nsit\nstaging\nprod\n", description: 'Environment to deploy', name: 'ENVIRONMENT')
-        booleanParam(defaultValue: false, description: 'Upload configuration files to S3', name: 'uploadConfigToS3')
-        booleanParam(defaultValue: false, description: 'Upload scripts to S3', name: 'uploadStriptsToS3')
+        booleanParam(defaultValue: false, description: 'Upload configuration files to S3', name: 'uploadConfig')
+        booleanParam(defaultValue: false, description: 'Upload scripts to S3', name: 'uploadStripts')
+        booleanParam(defaultValue: false, description: 'dummy param', name: 'dummyParam')
 	}
     agent {
         docker {
