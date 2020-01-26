@@ -13,8 +13,8 @@ parameters {
             args '-v /root/.m2:/root/.m2'
         }
     }
-    @Grab('com.amazonaws:aws-java-sdk:1.11.205')
     stages {
+        @Grab('com.amazonaws:aws-java-sdk:1.11.205')
         stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
