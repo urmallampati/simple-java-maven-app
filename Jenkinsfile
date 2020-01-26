@@ -3,10 +3,7 @@ parameters {
         choice(choices: "dev\nsit\nstaging\nprod\n", description: 'Environment to deploy', name: 'ENVIRONMENT')
         choice(choices: "create\nupdate\ndelete", description: 'Environment to deploy', name: 'action')
 	}
-	environment{
-            envr="${params.ENVIRONMENT}"
-            action=env.getProperty('devint_aws_cred_id')
-        }
+
     agent {
         docker {
             image 'maven:3-alpine'
@@ -15,7 +12,7 @@ parameters {
     }
     stages {
         stage('Build') {
-            when {  expression { params.action == 'create' }}
+            when {  expression { params.action == 'create'  || params.action == 'update'}}
             steps {
                 sh 'mvn -B -DskipTests clean package'
             }
