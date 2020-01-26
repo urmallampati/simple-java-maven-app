@@ -1,7 +1,7 @@
 pipeline {
 parameters {
         choice(choices: "dev\nsit\nstaging\nprod\n", description: 'Environment to deploy', name: 'ENVIRONMENT')
-        booleanParam(defaultValue: true, description: 'TEST', name: 'userFlag')
+        booleanParam(defaultValue: false, description: 'Upload configuration files to S3', name: 'uploadConfigToS3')
 	}
     agent {
         docker {
