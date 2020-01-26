@@ -4,6 +4,8 @@ parameters {
         booleanParam(defaultValue: false, description: 'Upload configuration files to S3', name: 'uploadConfig')
         booleanParam(defaultValue: false, description: 'Upload scripts to S3', name: 'uploadStripts')
         booleanParam(defaultValue: false, description: 'dummy param', name: 'dummyParam')
+                booleanParam(defaultValue: false, description: 'dummy param', name: 'dummyParam2')
+
 	}
     agent {
         docker {
