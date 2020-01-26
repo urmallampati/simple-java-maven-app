@@ -15,7 +15,7 @@ parameters {
     }
     stages {
         stage('Build') {
-            when {  expression { params.action == 'create' }}
+            when {  expression { action == 'create' }}
             steps {
                 sh 'mvn -B -DskipTests clean package'
             }
@@ -28,11 +28,6 @@ parameters {
                 always {
                     junit 'target/surefire-reports/*.xml'
                 }
-            }
-        }
-        stage('Deliver') {
-            steps {
-                sh './jenkins/scripts/deliver.sh'
             }
         }
     }
