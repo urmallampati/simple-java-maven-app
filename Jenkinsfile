@@ -1,3 +1,5 @@
+@Library('my-shared-library') _
+import com.mycompany.app.App
 pipeline {
 parameters {
         choice(choices: "dev\nsit\nstaging\nprod\n", description: 'Environment to deploy', name: 'ENVIRONMENT')
@@ -14,7 +16,6 @@ parameters {
         }
     }
     stages {
-        @Grab('com.amazonaws:aws-java-sdk:1.11.205')
         stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
